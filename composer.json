@@ -1,0 +1,22 @@
+{
+    "name": "yemaozi999/yemaozi-framework",
+    "description": "一款全新的开源框架",
+    "type": "project",
+    "authors": [
+        {
+            "name": "yemaozi999",
+            "email": "yemaozi999@qq.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.0",
+		"noahbuscher/macaw":"dev-master"
+	},
+	"autoload": {
+		"psr-4":{
+			"yemaozi999\\yemaozi-framework\\":"src/"
+		}
+	},
+    "minimum-stability": "dev"
+}
