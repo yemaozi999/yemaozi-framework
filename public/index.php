@@ -11,3 +11,4 @@ require '../vendor/autoload.php';
 
 //配置路由
 require '../config/routes.php';
+

@@ -8,6 +8,8 @@
 
 use NoahBuscher\Macaw\Macaw;
 
-Macaw::get("/",function(){
-   echo "hello world";
-});
+Macaw::get('/', 'DemoController\demo@index');
+Macaw::get('/page', 'DemoController\demo@page');
+Macaw::get('/views/(:num)', 'DemoController\demo@views');
+
+Macaw::dispatch();
