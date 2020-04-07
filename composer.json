@@ -19,6 +19,5 @@
         "App\\Model\\": "app/models"
       },
       "files":["public/index.php"]
-	},
-    "minimum-stability": "stable"
+	}
 }
