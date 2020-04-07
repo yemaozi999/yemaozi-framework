@@ -19,5 +19,8 @@
         "App\\Model\\": "app/models"
       },
       "files":["public/index.php"]
-	}
+	},
+    "config": {
+      "preferred-install": "dist"
+    }
 }
