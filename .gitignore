@@ -1,2 +1,4 @@
 ﻿vendor
 .idea
+composer.lock
+runtime
