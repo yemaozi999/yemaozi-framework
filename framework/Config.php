@@ -19,9 +19,12 @@ class Config
      * @desc 获取配置参数
      * @example
      */
-    public static function get($name="",$default=""){
+    public static function get($name="",$default="",$app=""){
 
         $config_path = CONFIG_PATH;
+        if($app){
+            $config_path .= $app."/";
+        }
 
         $config_param = explode(".",$name);
 

@@ -10,6 +10,7 @@ namespace app;
 
 
 use eftec\bladeone\BladeOne;
+use framework\Request;
 
 class BaseController
 {
@@ -25,7 +26,8 @@ class BaseController
 
     public function __construct()
     {
-        $this->request = $_REQUEST;
+        $this->request = Request::__make();
+
         $this->app_name = APP_NAME;
         $this->controller_name = CONTROLLER_NAME;
         $this->action_name = ACTION_NAME;

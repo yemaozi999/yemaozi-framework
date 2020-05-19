@@ -15,7 +15,6 @@ class AutoDispatcher implements BaseDispatcher
         private $app_name;
         private $controller_name;
         private $action_name;
-        private $dispatcher;
 
         public function __construct(){
 
@@ -37,12 +36,11 @@ class AutoDispatcher implements BaseDispatcher
         }
 
         public function run(){
-            $uri = $_SERVER['REQUEST_URI'];
-
+            /*$uri = $_SERVER['REQUEST_URI'];
             if (false !== $pos = strpos($uri, '?')) {
                 $uri = substr($uri, 0, $pos);
             }
-            $uri = rawurldecode($uri);
+            $uri = rawurldecode($uri);*/
             $class_mix = 'app\\'.$this->app_name.'\controller'.'\\'.$this->controller_name;
             if(class_exists($class_mix)){
                 define("APP_NAME",$this->app_name);

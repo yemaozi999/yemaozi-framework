@@ -8,6 +8,7 @@
 namespace app\admin\controller;
 
 use app\admin\service\UserService;
+use framework\Request;
 
 class Users extends AdminBase
 {
@@ -16,7 +17,8 @@ class Users extends AdminBase
         $server = new UserService();
         var_export($server->get_info());
 
-        var_export($this->request);
+        $param = $this->request->param();
+        var_export($param);
 
         $this->assign('id',"43432");
         $this->assign('name','aaa');
