@@ -8,6 +8,7 @@
 namespace app\admin\controller;
 
 use app\admin\service\UserService;
+use framework\Cache;
 use framework\Request;
 
 class Users extends AdminBase
@@ -23,5 +24,11 @@ class Users extends AdminBase
         $this->assign('id',"43432");
         $this->assign('name','aaa');
         echo $this->fetch();
+    }
+
+    public function cache(){
+        Cache::getInstance()->set('name','100');
+
+        echo Cache::getInstance()->get('name','0');
     }
 }
