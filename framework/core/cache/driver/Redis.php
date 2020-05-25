@@ -22,7 +22,7 @@ class Redis extends Driver
         'persistent' => false,
         'prefix'     => '',
         'tag_prefix' => 'tag:',
-        'serialize'  => [],
+        'serialize'  => ['serialize','unserialize'],
     ];
 
     private $handler;
