@@ -10,7 +10,7 @@ class ClassLoader
 {
     public static function base_loader($name){
         $file = PRO_ROOT.$name.".php";
-        if(file_exists($file)){
+        if(is_file($file)){
             require_once $file;
         }
     }
