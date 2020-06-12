@@ -34,19 +34,20 @@ class Cache implements CacheInterface
             //查看默认缓存驱动
             $driver = Config::get('cache.default');
             static::$instance = new static();
+            $container = Container::getInstance();
             //获取驱动配置
             switch(strtolower($driver)){
                 case 'file':
                     static::$instance->option = array_merge(Config::get('cache.stores.file'),$option);
-                    $class = new File(static::$instance->option);
+                    $class = $container->make(File::class,[static::$instance->option]);
                     break;
                 case "redis":
                     static::$instance->option = array_merge(Config::get('cache.stores.redis'),$option);
-                    $class = new Redis(static::$instance->option);
+                    $class = $container->make(Redis::class,[static::$instance->option]);
                     break;
                 default:
                     static::$instance->option = array_merge(Config::get('cache.stores.file'),$option);
-                    $class = new File(static::$instance->option);
+                    $class = $container->make(File::class,[static::$instance->option]);
                     break;
             }
             static::$instance = $class;
