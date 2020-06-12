@@ -62,9 +62,10 @@ class Container implements ContainerInterface
            return $this->instances[$class];
         }
         if($class instanceof Closure){
-            //如果是闭包
+            //如果是闭包返回闭包方法
             $obj = $this->invokeFunction($class,$vars);
         }else{
+            //如果是类返回类的实例
             $obj = $this->invokeClass($class,$vars);
         }
         $this->instances[$class] = $obj;
@@ -136,8 +137,6 @@ class Container implements ContainerInterface
         $type   = key($vars) === 0 ? 1 : 0;
         $params = $reflect->getParameters();
         $args   = [];
-
-
 
         foreach ($params as $param) {
             $name      = $param->getName();

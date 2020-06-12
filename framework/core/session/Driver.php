@@ -10,9 +10,9 @@ namespace framework\core\session;
 
 abstract class Driver
 {
-    public function destroy($session_id){}
+    public abstract function destroy($session_id);
 
-    public function read($session_id){}
+    public abstract function read($session_id);
 
-    public function write($session_id, $session_data){}
+    public abstract function write($session_id, $session_data);
 }

@@ -6,22 +6,26 @@
  * Time: 17:50
  */
 namespace framework\core\session\driver;
-class File
+use framework\core\session\Driver;
+
+class File extends Driver
 {
+
+
 
     public function destroy($session_id)
     {
-        // TODO: Implement destroy() method.
+
     }
 
     public function read($session_id)
     {
-        // TODO: Implement read() method.
+
     }
 
     public function write($session_id, $session_data)
     {
-        // TODO: Implement write() method.
+
     }
 
 }

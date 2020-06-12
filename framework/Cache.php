@@ -55,6 +55,27 @@ class Cache implements CacheInterface
         return static::$instance;
     }
 
+    public static function __make():Driver{
+        //获取默认配置
+        $driver = Config::get('cache.default');
+        static::$instance = new static();
+        $option = Config::get('cache.stores.'.$driver);
+
+        switch(strtolower($driver)){
+            case 'file':
+                static::$instance = new File($option);
+                break;
+            case 'redis':
+                static::$instance = new Redis($option);
+                break;
+            default:
+                static::$instance = new File($option);
+                break;
+        }
+        return static::$instance;
+    }
+
+
     public function has($key)
     {
         return $this->instance->has($key);

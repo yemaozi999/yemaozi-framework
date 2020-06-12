@@ -43,19 +43,16 @@ class Cache extends Driver
 
     public function destroy($session_id)
     {
-        // TODO: Implement destroy() method.
         return (string) $this->handler->delete($this->prefix . $session_id);
     }
 
     public function read($session_id)
     {
-        // TODO: Implement read() method.
         return (string) $this->handler->get($this->prefix . $session_id);
     }
 
     public function write($session_id, $session_data)
     {
-        // TODO: Implement write() method.
         return $this->handler->set($this->prefix . $session_id, $session_data, $this->expire);
     }
 

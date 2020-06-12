@@ -8,7 +8,8 @@
 namespace app\admin\controller;
 
 use app\admin\service\UserService;
-use framework\Cache;
+//use framework\Cache;
+use framework\facade\Cache;
 use framework\Request;
 
 class Users extends AdminBase
@@ -27,8 +28,12 @@ class Users extends AdminBase
     }
 
     public function cache(){
-        Cache::getInstance()->set('name','100');
+/*        Cache::getInstance()->set('name','100');
 
-        echo Cache::getInstance()->get('name','0');
+        echo Cache::getInstance()->get('name','0');*/
+
+        Cache::set('name','1000');
+        echo Cache::get("name");
+
     }
 }
