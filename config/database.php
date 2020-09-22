@@ -26,7 +26,7 @@ return [
             // 数据库编码默认采用utf8
             'charset'  => 'utf8',
             // 数据库表前缀
-            'prefix'   => 'fm_',
+            //'prefix'   => 'fm_',
             // 数据库调试模式
             'debug'    => true,
         ],
