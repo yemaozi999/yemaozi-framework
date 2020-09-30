@@ -23,3 +23,5 @@ require_once FRAMEWORK_PATH."ClassLoader/ClassLoader.php";
 $app = new App();
 $app->run();
 
+$app->end();
+

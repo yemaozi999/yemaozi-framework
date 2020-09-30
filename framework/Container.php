@@ -57,10 +57,11 @@ class Container implements ContainerInterface
      * @param vars 参数
      * @param newInstance  是否重新生成实例
      * */
-    public function make($class,array $vars,bool $newInstance = false){
+    public function make($class,array $vars=[],bool $newInstance = false){
         if(isset($this->instances[$class])&&!$newInstance){
            return $this->instances[$class];
         }
+
         if($class instanceof Closure){
             //如果是闭包返回闭包方法
             $obj = $this->invokeFunction($class,$vars);
@@ -95,7 +96,8 @@ class Container implements ContainerInterface
      * @param $class 类名称
      * @param vars 参数数组
      * */
-    private function invokeClass(string $class,array $vars=[]){
+    public function invokeClass(string $class,array $vars=[]){
+
         try {
             $reflect = new \ReflectionClass($class);
         } catch (\ReflectionException $e) {
@@ -110,6 +112,7 @@ class Container implements ContainerInterface
                 return $method->invokeArgs(null, $args);
             }
         }
+
         //调用构造方法
         $constructor = $reflect->getConstructor();
         $args = $constructor ? $this->bindParams($constructor, $vars) : [];

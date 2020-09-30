@@ -73,7 +73,7 @@ class Dispatcher implements BaseDispatcher
 
                 $this->action_name = $path_array[2]??$app_config['default_action'];
 
-                $class_mix = 'app\\'.$this->app_name.'\controller'.'\\'.$this->controller_name;
+                $class_mix = 'app'.DIRECTORY_SEPARATOR.$this->app_name.DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.''.$this->controller_name;
 
                 if(class_exists($class_mix)){
                     define("APP_NAME",$this->app_name);

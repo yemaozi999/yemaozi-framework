@@ -8,8 +8,10 @@
 namespace app\admin\controller;
 
 use app\admin\service\UserService;
-//use framework\Cache;
+use eftec\bladeone\BladeOne;
+use framework\App;
 use framework\facade\Cache;
+use framework\facade\Session;
 use framework\Request;
 
 class Users extends AdminBase
@@ -17,13 +19,14 @@ class Users extends AdminBase
     public function index(){
 
         $server = new UserService();
-        var_export($server->get_info());
 
         $param = $this->request->param();
-        var_export($param);
 
         $this->assign('id',"43432");
         $this->assign('name','aaa');
+
+        $this->assign('data',[1,2,3,4,5,6]);
+
         echo $this->fetch();
     }
 
@@ -32,8 +35,13 @@ class Users extends AdminBase
 
         echo Cache::getInstance()->get('name','0');*/
 
-        Cache::set('name','1000');
+        //Cache::set('name','1000');
         echo Cache::get("name");
 
+    }
+
+    public function session(){
+        //Session::set("name",321);
+        echo Session::get("name");
     }
 }
