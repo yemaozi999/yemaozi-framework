@@ -19,6 +19,6 @@ return [
     // 前缀
     'prefix'         => 'ymz',
 
-    'serialize'=> ['json_encode', 'json_decode'],
+    'serialize'=> ['json_encode', 'json_decode|true'],
 
 ];

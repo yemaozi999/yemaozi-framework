@@ -325,6 +325,12 @@ class Store
     {
         $unserialize = $this->serialize[1] ?? 'unserialize';
 
-        return (array) $unserialize($data);
+        $unserialize_arr = explode("|",$unserialize);
+        if(is_array($unserialize_arr)){
+            return (array) $unserialize_arr[0]($data,$unserialize_arr[1]);
+        }else{
+            return (array) $unserialize($data);
+        }
+
     }
 }

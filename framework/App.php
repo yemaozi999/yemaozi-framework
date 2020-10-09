@@ -41,7 +41,8 @@ class App
             if(Config::get("session")){
                 $varSessionId = Config::get('session.var_session_id');
                 //$this->session = new Session($this);
-                $this->session = Session::getInstance();
+                //$this->session = Session::getInstance();
+                Session::getInstance();
 
                 $cookieName   = Session::getName();
 
@@ -86,7 +87,9 @@ class App
     }
 
     public function end(){
-        Session::save();
+        if(Config::get("session")) {
+            Session::save();
+        }
     }
 
 }

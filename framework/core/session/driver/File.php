@@ -67,7 +67,7 @@ class File extends Driver
         $lifetime = $this->config['expire'];
         $now      = time();
 
-        $files = $this->findFiles($this->config['path'], function (SplFileInfo $item) use ($lifetime, $now) {
+        $files = $this->findFiles($this->config['path'], function (\SplFileInfo $item) use ($lifetime, $now) {
             return $now - $lifetime > $item->getMTime();
         });
 
