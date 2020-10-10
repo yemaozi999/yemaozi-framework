@@ -331,6 +331,14 @@ class Store
         }else{
             return (array) $unserialize($data);
         }
+    }
 
+    /**
+     * 析构函数
+     * @desc 保存session数据
+     * */
+    public function __destruct()
+    {
+        $this->save();
     }
 }

@@ -61,15 +61,17 @@ class Cache implements CacheInterface
         static::$instance = new static();
         $option = Config::get('cache.stores.'.$driver);
 
+        $container = Container::getInstance();
+
         switch(strtolower($driver)){
             case 'file':
-                static::$instance = new File($option);
+                static::$instance = $container->make(File::class,[$option]);
                 break;
             case 'redis':
-                static::$instance = new Redis($option);
+                static::$instance = $container->make(Redis::class,[$option]);
                 break;
             default:
-                static::$instance = new File($option);
+                static::$instance = $container->make(File::class,[$option]);
                 break;
         }
         return static::$instance;

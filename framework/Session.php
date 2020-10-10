@@ -40,11 +40,11 @@ class Session
             static::$instance->option = array_merge(Config::get('session'),$option);
 
             if($driver=="cache"){
-                $class = new Store(Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize'));
-                //$class = $container->make(Store::class,[Config::get('session.name'),\framework\core\session\driver\Cache::class,Config::get('session.serialize')]);
+                //$class = new Store(Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize'));
+                $class = $container->make(Store::class,[Config::get('session.name'),new \framework\core\session\driver\Cache,Config::get('session.serialize')]);
             }else{
-                $class = new Store(Config::get('session.name'),new File(),Config::get('session.serialize'));
-                //$class = $container->make(Store::class,[Config::get('session.name'),File::class,Config::get('session.serialize')]);
+                //$class = new Store(Config::get('session.name'),new File(),Config::get('session.serialize'));
+                $class = $container->make(Store::class,[Config::get('session.name'),new File(),Config::get('session.serialize')]);
             }
 
             static::$instance = $class;
@@ -64,11 +64,11 @@ class Session
             $option = Config::get('session');
             $container = Container::getInstance();
             if($driver=="cache"){
-                static::$instance = new Store(Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize'));
-                //static::$instance = $container->make(Store::class,[Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize')]);
+                //static::$instance = new Store(Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize'));
+                static::$instance = $container->make(Store::class,[Config::get('session.name'),new \framework\core\session\driver\Cache(),Config::get('session.serialize')]);
             }else{
-                static::$instance = new Store(Config::get('session.name'),new File(),Config::get('session.serialize'));
-                //static::$instance = $container->make(Store::class,[Config::get('session.name'),new File(),Config::get('session.serialize')]);
+                //static::$instance = new Store(Config::get('session.name'),new File(),Config::get('session.serialize'));
+                static::$instance = $container->make(Store::class,[Config::get('session.name'),new File(),Config::get('session.serialize')]);
             }
             return static::$instance;
         }
@@ -83,6 +83,26 @@ class Session
     public static function set($key, $value)
     {
         return static::$instance->set($key,$value);
+    }
+
+    public static function all()
+    {
+        return static::$instance->all();
+    }
+
+    public static function delete($key)
+    {
+        return static::$instance->delete($key);
+    }
+
+    public static function destroy()
+    {
+        return static::$instance->destroy();
+    }
+
+    public static function clear()
+    {
+        return static::$instance->clear();
     }
 
     public static function save()

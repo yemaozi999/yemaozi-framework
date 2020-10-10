@@ -18,7 +18,7 @@ return [
     'expire'         => 86400,
     // 前缀
     'prefix'         => 'ymz',
-
+    //序列化
     'serialize'=> ['json_encode', 'json_decode|true'],
 
 ];

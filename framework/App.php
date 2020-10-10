@@ -29,7 +29,10 @@ class App
     public function __construct()
     {
         //common.php 文件引入
-        include_once PRO_ROOT."app/common.php";
+        //include_once PRO_ROOT."app/common.php";
+
+        //读取extend文件夹的文件
+        $this->extendLoad(EXTEND_PATH);
 
         $auto_route = Config::get('app.auto_route');
 
@@ -55,15 +58,9 @@ class App
                 if ($sessionId) {
                     Session::setId($sessionId);
                 }
-
                 Session::init();
-
                 //$request->withSession($this->session);
-
                 setcookie($cookieName, Session::getId());
-
-                //$this->session->save();
-
             }
 
             if($auto_route == false){
@@ -86,9 +83,23 @@ class App
         $this->dispatcher->run();
     }
 
-    public function end(){
-        if(Config::get("session")) {
-            Session::save();
+    private static function extendLoad($dir, $level=0) {
+
+        $temp=scandir($dir);
+        $level++;
+        //遍历文件夹
+        foreach($temp as $v){
+            $a=$dir.'/'.$v;
+            if(is_dir($a)){//如果是文件夹则执行
+                if($v=='.' || $v=='..'){
+                    continue;
+                }
+                static::extendLoad($a, $level);
+            }else{
+                if(is_file($a)){
+                    require $a;
+                }
+            }
         }
     }
 

@@ -17,11 +17,10 @@ define("CONFIG_PATH",__DIR__."/../config/");
 define("APP_PATH",__DIR__."/../app/");
 define("FRAMEWORK_PATH",__DIR__.'/../framework/');
 define("RUNTIME_PATH",__DIR__."/../runtime/");
+define("EXTEND_PATH",__DIR__."/../extend/");
 
-require_once FRAMEWORK_PATH."ClassLoader/ClassLoader.php";
+//require_once FRAMEWORK_PATH."ClassLoader/ClassLoader.php";
 
 $app = new App();
 $app->run();
-
-$app->end();
 

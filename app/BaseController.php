@@ -8,7 +8,6 @@
 
 namespace app;
 
-
 use eftec\bladeone\BladeOne;
 use framework\Request;
 
