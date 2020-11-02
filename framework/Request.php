@@ -8,6 +8,7 @@
 
 namespace framework;
 use ArrayAccess;
+use framework\file\UploadedFile;
 
 /**
  * 请求管理类

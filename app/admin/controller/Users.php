@@ -11,8 +11,10 @@ use app\admin\service\UserService;
 use eftec\bladeone\BladeOne;
 use framework\App;
 use framework\facade\Cache;
+use framework\facade\Filesystem;
 use framework\facade\Session;
 use framework\Request;
+
 
 class Users extends AdminBase
 {
@@ -41,7 +43,25 @@ class Users extends AdminBase
     }
 
     public function session(){
-        //Session::set("name",321);
-        echo Session::get("name");
+/*        Session::set("name",444);
+        Session::set("name",555);
+        Session::set("age",55);
+        Session::set("w.a",55);
+        Session::set("w.b",56);*/
+        $data = Session::get("w");
+
+        var_export($data);
+
     }
+
+    public function upload(){
+
+        $files = $this->request->file('file1');
+
+        //var_export($files);
+        //上传文件
+        Filesystem::putFile("topic",$files,'md5');
+
+    }
+
 }
