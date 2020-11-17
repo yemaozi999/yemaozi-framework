@@ -19,6 +19,7 @@ use League\Flysystem\Cached\Storage\Memory as MemoryStore;
 use League\Flysystem\Filesystem;
 use framework\Cache;
 use framework\File;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * Class Driver
@@ -34,14 +35,20 @@ abstract class Driver
     /** @var Filesystem */
     protected $filesystem;
 
+    /** @var rootpath */
+    protected $rootpath;
     /**
      * 配置参数
      * @var array
      */
     protected $config = [];
 
-    public function __construct(\framework\core\cache\Driver $cache, array $config)
+    public function __construct($cache, array $config)
     {
+        if(!empty($config['url'])){
+            $this->rootpath = $config['url'];
+        }
+
         $this->cache  = $cache;
         $this->config = array_merge($this->config, $config);
 
@@ -102,7 +109,7 @@ abstract class Driver
      */
     public function putFile(string $path, File $file, $rule = null, array $options = [])
     {
-        return $this->putFileAs($path, $file, $file->hashName($rule), $options);
+        return $this->rootpath."/".$this->putFileAs($path, $file, $file->hashName($rule), $options);
     }
 
     /**
@@ -124,7 +131,7 @@ abstract class Driver
             fclose($stream);
         }
 
-        return $result ? $path : false;
+        return $this->rootpath."/".$result ? $path : false;
     }
 
     public function __call($method, $parameters)

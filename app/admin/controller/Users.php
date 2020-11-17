@@ -37,7 +37,7 @@ class Users extends AdminBase
 
         echo Cache::getInstance()->get('name','0');*/
 
-        //Cache::set('name','1000');
+        //Cache::set('name','1001');
         echo Cache::get("name");
 
     }
@@ -60,8 +60,14 @@ class Users extends AdminBase
 
         //var_export($files);
         //上传文件
-        Filesystem::putFile("topic",$files,'md5');
+        //获取前缀
+        //echo $files->getOriginalExtension();
 
+        //echo Filesystem::putFile("topic",$files,'md5');
+        //Filesystem::putFileAs('topic',$files,"abc.png");
+
+        //$filesystem = new \framework\Filesystem();
+        echo Filesystem::disk("public")->putFile("topic",$files,'md5');
     }
 
 }

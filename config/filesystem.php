@@ -6,7 +6,7 @@
  * Time: 9:35
  */
 return [
-    'default' =>  'local',
+    'default' =>  'qiniu',
     'prefix'  => 'filesystem',//前缀
     'disks'   => [
         'local'  => [
@@ -15,10 +15,18 @@ return [
         ],
         'public' => [
             'type'     => 'local',
-            'root'       => PUBLIC_PATH . 'public/storage',
+            'root'       => PUBLIC_PATH . 'storage',
             'url'        => '/storage',
             'visibility' => 'public',
         ],
-        // 更多的磁盘配置信息
+        'qiniu' => [
+            'accessKey' => '',
+            'secretKey' => '',
+            'bucket' => '',
+            'domain' =>'',
+            'url'=>''
+        ],
+
+
     ],
 ];

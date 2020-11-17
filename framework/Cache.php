@@ -13,10 +13,12 @@ use framework\core\cache\driver\File;
 use framework\core\cache\driver\Redis;
 use Psr\SimpleCache\CacheInterface;
 
-class Cache implements CacheInterface
+class Cache //implements CacheInterface
 {
 
     public static $instance;
+
+    public $driver;
 
     public $option = [
 
@@ -26,7 +28,7 @@ class Cache implements CacheInterface
     {
     }
 
-    public static function getInstance($option=[]):Driver{
+    public static function getInstance($option=[]){
 
         if(static::$instance){
             return static::$instance;
@@ -50,12 +52,12 @@ class Cache implements CacheInterface
                     $class = $container->make(File::class,[static::$instance->option]);
                     break;
             }
-            static::$instance = $class;
+            static::$instance->driver = $class;
         }
         return static::$instance;
     }
 
-    public static function __make():Driver{
+    public static function __make(){
         //获取默认配置
         $driver = Config::get('cache.default');
         static::$instance = new static();
@@ -64,59 +66,62 @@ class Cache implements CacheInterface
         $container = Container::getInstance();
 
         switch(strtolower($driver)){
-            case 'file':
-                static::$instance = $container->make(File::class,[$option]);
-                break;
+            /*case 'file':
+                $class = $container->make(File::class,[$option]);
+                break;*/
             case 'redis':
-                static::$instance = $container->make(Redis::class,[$option]);
+                $class = $container->make(Redis::class,[$option]);
                 break;
             default:
-                static::$instance = $container->make(File::class,[$option]);
+                $class = $container->make(File::class,[$option]);
                 break;
         }
+        static::$instance->driver = $class;
+
         return static::$instance;
     }
 
 
     public function has($key)
     {
-        return $this->instance->has($key);
+        return static::$instance->driver->has($key);
     }
 
     public function getMultiple($keys, $default = null)
     {
-        return $this->instance->getMultiple($keys,$default);
+        return static::$instance->driver->getMultiple($keys,$default);
     }
 
     public function get($key, $default = null)
     {
-        return $this->instance->get($key,$default);
+        return static::$instance->driver->get($key,$default);
     }
 
     public function set($key, $value, $ttl = null)
     {
-        return $this->instance->set($key,$value,$ttl);
+        return static::$instance->driver->set($key,$value,$ttl);
     }
 
     public function delete($key)
     {
-        return $this->instance->delete($key);
+        return static::$instance->driver->delete($key);
     }
 
     public function clear()
     {
-        return $this->instance->clear();
+        return static::$instance->driver->clear();
     }
 
     public function setMultiple($values, $ttl = null)
     {
-        return $this->instance->setMultiple($values,$ttl);
+        return static::$instance->driver->setMultiple($values,$ttl);
     }
 
     public function deleteMultiple($keys)
     {
-        return $this->instance->deleteMultiple($keys);
+        return static::$instance->driver->deleteMultiple($keys);
     }
+
 
 
 }
