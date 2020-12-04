@@ -11,6 +11,7 @@ namespace framework;
 
 use framework\dispatcher\AutoDispatcher;
 use framework\dispatcher\Dispatcher;
+use think\facade\Db;
 
 class App
 {
@@ -35,7 +36,7 @@ class App
         $this->extendLoad(EXTEND_PATH);
 
         $auto_route = Config::get('app.auto_route');
-
+        Db::setConfig(Config::get('database'));
         if(!self::$instance){
 
             $request = new Request();

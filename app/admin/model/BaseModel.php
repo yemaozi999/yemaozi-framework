@@ -17,7 +17,6 @@ class BaseModel extends Model
 {
     public function __construct(array $data = [])
     {
-        Db::setConfig(Config::get('database'));
         parent::__construct($data);
     }
 }
